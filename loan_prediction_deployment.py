@@ -29,8 +29,8 @@ applicant_income = st.number_input("Applicant Income", min_value=0)
 coapplicant_income = st.number_input("Coapplicant Income", min_value=0)
 loan_amount = st.number_input("Loan Amount", min_value=0)
 loan_amount_term = st.number_input("Loan Amount Term", min_value=0)
-credit_history = st.selectbox("Credit History", encoder["Credit_History"].classes_)
-property_area = st.selectbox("Property Area", encoder["Property_Area"].classes_)
+credit_history = st.number_input("Credit History")
+property_area = st.number_input("Property Area")
 
 # Create DataFrame
 df = pd.DataFrame({
