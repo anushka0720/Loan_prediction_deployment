@@ -47,16 +47,17 @@ df = pd.DataFrame({
     "Property_Area": [property_area]
 })
 
-# Predict Button
 if st.button("Predict Loan Status"):
 
-    # Encode categorical columns
-    for col in encoder:
-    df[col] = encoder[col].transform(df[col])
+    # Encode categorical columns safely
+    for col in df.columns:
+        if col in encoder:
+            df[col] = encoder[col].transform(df[col])
 
     prediction = model.predict(df)
 
     if prediction[0] == 1:
-        st.success("Loan Approved")
+        st.success("Loan Approved ✅")
     else:
-        st.error("Loan Not Approved")
+        st.error("Loan Not Approved ❌")
+
