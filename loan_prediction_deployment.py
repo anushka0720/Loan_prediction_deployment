@@ -48,12 +48,16 @@ df = pd.DataFrame({
 })
 
 if st.button("Predict Loan Status"):
+
     for col in df.columns:
-    if col in encoder:
-        try:
+        if col in encoder:
             df[col] = encoder[col].transform(df[col])
-        except ValueError:
-            st.error(f"Invalid value selected for {col}. Please check input.")
-            st.stop()
+
     prediction = model.predict(df)
+
+    if prediction[0] == 1:
+        st.success("Loan Approved ✅")
+    else:
+        st.error("Loan Not Approved ❌")
+
 
