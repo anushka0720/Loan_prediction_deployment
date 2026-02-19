@@ -12,8 +12,8 @@ import pandas as pd
 import joblib
 
 # Load trained model and encoders
-model = joblib.load("loan_prediction_model.pkl")
-encoder = joblib.load("label_encoder.pkl")
+model = joblib.loan("loan_prediction_model.pkl")
+encoder = joblib.loan("label_encoder.pkl")
 
 st.title("Loan Prediction App")
 
@@ -57,6 +57,6 @@ if st.button("Predict Loan Status"):
     prediction = model.predict(df)
 
     if prediction[0] == 1:
-        st.success("Loan Approved ✅")
+        st.success("Loan Approved")
     else:
-        st.error("Loan Not Approved ❌")
+        st.error("Loan Not Approved")
