@@ -33,22 +33,22 @@ credit_history = st.number_input("Credit_History")
 property_area = st.selectbox("Property_Area", encoder["Property_Area"].classes_)
 
 # Create DataFrame
-df = pd.DataFrame({
-    "Gender": [gender],
-    "Married": [married],
-    "Dependents": [dependents],
-    "Education": [education],
-    "Self_Employed": [self_employed],
-    "ApplicantIncome": [applicant_income],
-    "CoapplicantIncome": [coapplicant_income],
-    "LoanAmount": [loan_amount],
-    "Loan_Amount_Term": [loan_amount_term],
-    "Credit_History": [credit_history],
-    "Property_Area": [property_area]
-})
-
+input_data = pd.DataFrame([[
+    gender,
+    married,
+    dependents,
+    education,
+    self_employed,
+    applicant_income,
+    coapplicant_income,
+    loan_amount,
+    loan_amount_term,
+    credit_history,
+    property_area    
+]], columns=model.feature_names_in_)
 categorical_columns = ['Gender', 'Married', 'Education', 
                        'Self_Employed', 'Property_Area']
+
 if st.button("Predict Loan Status"):
     for col in categorical_columns:
         unseen = set(df[col]) - set(encoder[col].classes_)
