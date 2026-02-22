@@ -48,10 +48,12 @@ df = pd.DataFrame({
 })
 
 if st.button("Predict Loan Status"):
-
-    for col in df.columns:
-        if col in encoder:
-            df[col] = encoder[col].transform(df[col])
+    for col in categorical_columns:
+        unseen = set(df[col]) - set(encoder[col].classes_)
+        if unseen:
+            print(f"Unseen labels in {col}: {unseen}")
+            df[col] = df[col].apply(lambda x: x if x in encoder[col].classes_ else encoder[col].classes_[0])
+        df[col] = encoder[col].transform(df[col])
 
     prediction = model.predict(df)
 
