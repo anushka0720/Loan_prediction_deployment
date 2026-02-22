@@ -22,7 +22,7 @@ st.write("Enter applicant details below:")
 # User Inputs
 gender = st.selectbox("Gender", encoder["Gender"].classes_)
 married = st.selectbox("Married", encoder["Married"].classes_)
-dependents = st.selectbox("Dependents", encoder["Dependents"].classes_)
+dependents = st.number_input("Dependents")
 education = st.selectbox("Education", encoder["Education"].classes_)
 self_employed = st.selectbox("Self_Employed", encoder["Self_Employed"].classes_)
 applicant_income = st.number_input("ApplicantIncome", min_value=0)
@@ -30,7 +30,7 @@ coapplicant_income = st.number_input("CoapplicantIncome", min_value=0)
 loan_amount = st.number_input("LoanAmount", min_value=0)
 loan_amount_term = st.number_input("Loan_Amount_Term", min_value=0)
 credit_history = st.number_input("Credit_History")
-property_area = st.number_input("Property_Area")
+property_area = st.selectbox("Property_Area", encoder["Property_Area"].classes_)
 
 # Create DataFrame
 df = pd.DataFrame({
@@ -47,6 +47,8 @@ df = pd.DataFrame({
     "Property_Area": [property_area]
 })
 
+categorical_columns = ['Gender', 'Married', 'Education', 
+                       'Self_Employed', 'Property_Area']
 if st.button("Predict Loan Status"):
     for col in categorical_columns:
         unseen = set(df[col]) - set(encoder[col].classes_)
