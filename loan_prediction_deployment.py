@@ -48,7 +48,6 @@ input_data = pd.DataFrame([[
 ]], columns=model.feature_names_in_)
 categorical_columns = ['Gender', 'Married', 'Education', 
                        'Self_Employed', 'Property_Area']
-
 if st.button("Predict Loan Status"):
     for col in categorical_columns:
         unseen = set(df[col]) - set(encoder[col].classes_)
